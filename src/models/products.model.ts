@@ -1,10 +1,21 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
+import {Entity, belongsTo, hasMany, model, property} from '@loopback/repository';
 import {Brand} from './brand.model';
 import {Categories} from './categories.model';
-import {ProductCategory} from './product-category.model';
 import {Images} from './images.model';
+import {ProductCategory} from './product-category.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fkProductIdBrand: {
+        name: "fkProductIdBrand",
+        entity: 'Brand',
+        entityKey: 'id',
+        foreignKey: 'id_brand',
+      }
+    },
+  },
+})
 export class Products extends Entity {
   @property({
     type: 'number',
